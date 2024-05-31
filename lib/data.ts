@@ -10,6 +10,5 @@ export async function fetchCardData(id: string) {
     return game_user.rows;
   } catch (error) {
     console.error("Database Error:", error);
-    throw new Error("Failed to fetch card data.");
   }
 }

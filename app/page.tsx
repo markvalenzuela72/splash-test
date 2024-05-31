@@ -19,9 +19,7 @@ export default function RegisterUser() {
   useEffect(() => {
     if (state && state.id) {
       const game_user_id = state.id;
-      redirect(`/${game_user_id}`);
-    } else {
-      // redirect("");
+      window.location.replace(`/${game_user_id}`);
     }
   }, [state]);
   return (
