@@ -1,26 +1,30 @@
-import { useState } from "react";
 import { Card, CardHeader, CardTitle } from "@/components/ui/card";
 import { fetchCardData } from "@/lib/data";
 import { Medal, CircleUser, Clock } from "lucide-react";
-import { PlusCircle, MinusCircle } from "lucide-react";
 import { headers } from "next/headers";
 import PointsInput from "./PointsInput";
 import MultiplierInput from "./MultiplierInput";
 
 export default async function Header() {
   const headersList = headers();
-  const fullUrl = headersList.get("referer") || "";
+  const fullUrl = headersList.get("referer");
 
   let game_user_id = "";
-  try {
-    const url = new URL(fullUrl);
-    game_user_id = url.pathname.replace(/\//g, "").split("?")[0];
-  } catch (error) {
+
+  if (fullUrl) {
+    const urlObj = new URL(fullUrl);
+    const pathname = urlObj.pathname;
+    const pathParts = pathname.split("/");
+
+    game_user_id = pathParts[pathParts.length - 1].split("?")[0];
+  } else {
     game_user_id = "410544b2-4001-4271-9855-fec4b6a6442a";
-    console.error("Invalid URL", error);
+    console.log("Referer header is not present.");
   }
   let fetchData: any[] = [];
-  if (game_user_id) {
+
+  console.log(game_user_id, "____game_user_id");
+  if (game_user_id !== null) {
     fetchData = await fetchCardData(game_user_id);
   }
 

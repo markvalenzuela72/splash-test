@@ -20,6 +20,8 @@ export default function RegisterUser() {
     if (state && state.id) {
       const game_user_id = state.id;
       redirect(`/${game_user_id}`);
+    } else {
+      // redirect("");
     }
   }, [state]);
   return (

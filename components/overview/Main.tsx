@@ -7,7 +7,7 @@ import GameDashboard from "@/app/[id]/page";
 import { usePathname } from "next/navigation";
 import Chat from "./Chat";
 
-export default function Main({ points, multiplier }) {
+export default function Main() {
   const [isStartGame, setIsStartGame] = useState(false);
   const [speedValue, setSpeedValue] = useState(1);
 

@@ -1,12 +1,12 @@
 "use server";
 import { sql } from "@vercel/postgres";
-import { GameUser } from "./definition"; // Assuming chat is not used here
+import { GameUser } from "./definition";
+import { redirect } from "next/dist/server/api-utils";
 
 export async function authenticate(
   prevState: string | undefined,
   formData: FormData
 ): Promise<GameUser> {
-  // Specify the return type as Promise<GameUser>
   const rawFormData = {
     name: formData.get("game_name") as string,
   };
@@ -19,6 +19,5 @@ export async function authenticate(
     return user;
   } catch (error) {
     console.error("Failed to fetch user:", error);
-    throw new Error("Failed to fetch user.");
   }
 }
